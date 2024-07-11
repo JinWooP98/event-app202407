@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './SignUpForm.module.scss';
+import {AUTH_URL} from "../../config/host-config";
 
 const EmailInput = () => {
 
@@ -9,7 +10,7 @@ const EmailInput = () => {
     const [enteredEmail, setEnteredEmail] = useState('');
 
     // 검증여부
-    const [emailVaild, setEmailValid] = useState(false);
+    const [emailValid, setEmailValid] = useState(false);
 
     // 에러 메시지
     const [error, setError] = useState('');
@@ -22,26 +23,38 @@ const EmailInput = () => {
     };
 
     // 이메일 검증 후속 처리
-    const checkEmail = (email) => {
-        if (!emailVaild) {
+    const checkEmail = async (email) => {
+        if (!emailValid) {
             // 에러메시지 세팅
             setError('이메일 형식이 유효하지 않습니다.');
             return;
         }
 
         // 중복 검사
+
+        const response = await fetch(`${AUTH_URL}/check-email?email=${email}`);
+        // console.log(response);
+        const flag = await response.json();
+
+        if(flag) {
+            setEmailValid(false);
+            setError('이메일이 중복되었습니다.')
+        }
+
+        console.log(flag);
+
     };
 
     const changeHandler = e => {
         const email = e.target.value;
-        const isVaild = validateEmail(email);
-        // console.log('isValid: ', isVaild);
+        const isValid = validateEmail(email);
+        // console.log('isValid: ', isValid);
 
         setEnteredEmail(email);
-        setEmailValid(isVaild);
+        setEmailValid(isValid);
 
         // 이메일 검증 후속처리
-        checkEmail();
+        checkEmail(email);
     };
 
     // 렌더링 되자마자 입력창에 포커싱
@@ -57,9 +70,9 @@ const EmailInput = () => {
                 type="email"
                 placeholder="Enter your email"
                 onChange={changeHandler}
-                className={!emailVaild ? styles.invalidInput : ''}
+                className={!emailValid ? styles.invalidInput : ''}
             />
-            { !emailVaild && <p className={styles.errorMessage}>{error}</p> }
+            { !emailValid && <p className={styles.errorMessage}>{error}</p> }
         </>
     );
 };
