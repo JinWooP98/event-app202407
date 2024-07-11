@@ -4,6 +4,7 @@ import styles from './EventForm.module.scss';
 import { useNavigate, Form, redirect } from 'react-router-dom';
 import { EVENT_URL } from '../config/host-config';
 
+// test push를 위한 주석
 const EventForm = ({ method, event = {} }) => {
   const {
     title,
