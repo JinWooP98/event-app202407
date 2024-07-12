@@ -19,6 +19,11 @@ const VerificationInput = () => {
 
     };
 
+    //서버에 검증요청 보내기
+    const verifyCode = async (code) => {
+        console.log('요청 전송!', code);
+    };
+
     const changeHandler = (index, inputValue) => {
         const updatedCodes = [...codes, inputValue];
         console.log(updatedCodes);
@@ -27,6 +32,19 @@ const VerificationInput = () => {
 
         // 입력이 끝나면 다음 칸으로 포커스 이동
         focusNextInput(index);
+
+        // 입력한 숫자 합치기
+        // join() : 배열안에 있는 요소를 전부 연결
+        // join() 의 매개변수는 배열안의 있는 요소를 연결할때 그 요소사이에 들어갈 값, 빈칸으로 두고싶다면 빈 문자열 넣기
+        if(updatedCodes.length === 4 && index === 4) {
+            const code = updatedCodes.join('');
+
+            // 서버로 인증코드 검증 요청 전송
+            verifyCode(code);
+        }
+
+
+
     };
 
     useEffect(() => {
