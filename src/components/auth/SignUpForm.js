@@ -69,7 +69,7 @@ const SignUpForm = () => {
             alert(`회원가입에 성공하셨습니다.`);
             navigate('/');
         }
-    }
+    };
 
     useEffect(() => {
         // 활성화 여부 감시
