@@ -52,6 +52,8 @@ const SignUpForm = () => {
 
         e.preventDefault();
 
+        if(step !== 3) return;
+
         const payload =  {
             email: enteredEmail,
             password: enteredPassword
@@ -79,6 +81,7 @@ const SignUpForm = () => {
     }, [enteredEmail, passwordIsVaild]);
 
     return (
+        // 구조상 input 태그를 form 태그 안에 넣는 것이 바람직?
         <form onSubmit={submitHandler}>
             <div className={styles.signupForm}>
                 <div className={styles.formStepActive}>

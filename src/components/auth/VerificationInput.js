@@ -37,6 +37,8 @@ const VerificationInput = ({email, onSuccess}) => {
             setError('유효하지 않거나 만료된 코드입니다. 인증코드를 재발송합니다.');
             // 인풋창 비우기
             setCodes([...Array(4).fill('')]);
+            // 인풋 포커스 리셋
+            inputsRef.current[0].focus();
             // 타이머 리셋
             setTimer(300);
 
@@ -51,7 +53,6 @@ const VerificationInput = ({email, onSuccess}) => {
     const changeHandler = (index, inputValue) => {
         const updatedCodes = [...codes];
         updatedCodes[index -1] = inputValue;
-        console.log(updatedCodes);
         // codes 변수에 입력한 숫자 담아놓기
         setCodes(updatedCodes);
 

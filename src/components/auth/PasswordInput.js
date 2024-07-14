@@ -46,7 +46,6 @@ const PasswordInput = ({ onSuccess }) => {
                 placeholder="Enter your password"
             />
             {!passwordValid && <p className={styles.errorMessage}>{errorMessage}</p>}
-
         </>
     );
 };

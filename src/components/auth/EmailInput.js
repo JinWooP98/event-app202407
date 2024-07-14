@@ -7,9 +7,6 @@ import {debounce} from "lodash/function";
 const EmailInput = ({onSuccess}) => {
     const inputRef = useRef();
 
-    // 입력한 이메일
-    const [enteredEmail, setEnteredEmail] = useState('');
-
     // 검증여부
     const [emailVaild, setEmailValid] = useState(false);
 
@@ -32,9 +29,8 @@ const EmailInput = ({onSuccess}) => {
 
         // 중복 검사
         const response = await fetch(`${AUTH_URL}/check-email?email=${email}`);
-        // console.log('res: ', response);
+        // 이메일이 중복일 경우 true , 중복이 아닐 경우 false
         const flag = await response.json();
-        // console.log('flag: ', flag);
         if (flag) {
             setEmailValid(false);
             setError('이메일이 중복되었습니다.');
