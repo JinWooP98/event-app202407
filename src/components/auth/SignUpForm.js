@@ -21,7 +21,7 @@ const SignUpForm = () => {
     const [enteredEmail, setEnteredEmail] = useState('');
     // 입력된 패스워드
     const [enteredPassword, setEnteredPassword] = useState('');
-    const [passwordIsVaild, setPasswordIsValid] = useState(false);
+    const [passwordIsValid, setPasswordIsValid] = useState(false);
 
     // 회원가입 버튼 활성화 여부
     const [activeButton, setActiveButton] = useState(false);
@@ -75,14 +75,16 @@ const SignUpForm = () => {
 
     useEffect(() => {
         // 활성화 여부 감시
-        const isActive = enteredEmail && passwordIsVaild;
+        const isActive = enteredEmail && passwordIsValid;
         setActiveButton(isActive);
 
-    }, [enteredEmail, passwordIsVaild]);
+    }, [enteredEmail, passwordIsValid]);
 
     return (
         // 구조상 input 태그를 form 태그 안에 넣는 것이 바람직?
-        <form onSubmit={submitHandler}>
+        <form
+            onSubmit={submitHandler}
+        >
             <div className={styles.signupForm}>
                 <div className={styles.formStepActive}>
 
@@ -114,3 +116,4 @@ const SignUpForm = () => {
 };
 
 export default SignUpForm;
+

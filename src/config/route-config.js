@@ -16,6 +16,7 @@ import { action as manipulateAction }
   from '../components/EventForm';
 import WelcomePage from '../pages/WelcomePage';
 import SignUpPage from '../pages/SignUpPage';
+import {signUpAction} from "../components/auth/SignUpForm";
 
 
 // 라우터 설정
@@ -60,7 +61,7 @@ const homeRouter = [
   }, // 웰컴 페이지 (로그인화면 or 로그인완료화면)
   {
     path: 'sign-up',
-    element: <SignUpPage />
+    element: <SignUpPage />,
   } // 회원가입 페이지
 ];
 
