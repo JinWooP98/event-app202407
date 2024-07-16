@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import EventList from '../components/EventList';
 import EventSkeleton from '../components/EventSkeleton';
 import { EVENT_URL } from '../config/host-config';
+import {useRouteLoaderData} from "react-router-dom";
 
 // npm install loadsh
 // import { debounce, throttle } from 'lodash';
@@ -31,6 +32,7 @@ const Events = () => {
   // 로딩 스켈레톤 스크린을 보여줄 개수
   const [skeletonCount, setSkeletonCount] = useState(4);
 
+  const {token} = useRouteLoaderData('user-data');
 
   // 서버로 목록 조회 요청보내기
   const loadEvents = async() => {
@@ -43,7 +45,9 @@ const Events = () => {
     console.log('start loading...');
     setLoading(true);
 
-    const response = await fetch(`${EVENT_URL}/page/${currentPage}?sort=date`);
+    const response = await fetch(`${EVENT_URL}/page/${currentPage}?sort=date`, {
+      headers: {'Authorization': 'Bearer ' + token }
+    });
     const { events: loadedEvents, totalCount } = await response.json();
 
     console.log('loaded: ', { loadedEvents, totalCount, len: loadedEvents.length });
