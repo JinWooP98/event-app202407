@@ -22,10 +22,13 @@ export const userDataLoader = () => {
 
 // 접근 권한을 확인하는 loader
 export const authCheckLoader = () => {
+
     const userData = getUserData();
+
     if(!userData) {
         alert('로그인이 필요한 서비스입니다.');
         return redirect('/');
     }
+
     return null; // 현재페이지에 머무름
 };
