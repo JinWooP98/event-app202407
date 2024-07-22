@@ -16,7 +16,6 @@ export const getUserToken = () => {
 
 // 로그인 회원정보를 불러오는 loader
 export const userDataLoader = () => {
-    console.log('userDataLoader call!!');
     return getUserData();
 };
 

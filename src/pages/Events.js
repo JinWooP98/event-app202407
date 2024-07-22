@@ -41,11 +41,11 @@ const Events = () => {
   const loadEvents = async() => {
 
     if (isFinish) {
-      console.log('loading finished!');
+
       return;
     }
 
-    console.log('start loading...');
+
     setLoading(true);
 
     const response = await fetch(`${EVENT_URL}/page/${currentPage}?sort=date`, {

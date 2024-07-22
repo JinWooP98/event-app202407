@@ -9,7 +9,6 @@ const DUMMY_PRODUCTS = [
 
 const Products = () => {
 
-  console.log('products!');
 
 
   return (
